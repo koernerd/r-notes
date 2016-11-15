@@ -1,0 +1,15 @@
+# ########################
+#
+# READ CSV FILE with full data
+#
+circuitscan <- read.csv("~/ELCAUG2016.csv")
+
+#
+# Read second csv file for use as keyword filter
+#
+custcircuitlist <- as.matrix(read.csv("~/examplecircuits.csv"))
+
+#
+# create the scanned data subset data.frame
+#
+circuitscan_sorted <- subset(circuitscan, grepl(paste(custcircuitlist, collapse = "|"), circuitscan$CIRCUITID))
