@@ -1,0 +1,24 @@
+#
+# Read in the test data, Flag column is blank beyond the header
+#
+testdata <-read.csv("~/test_trostarget.csv")
+#
+# compare minutes versus the target number, set flag to 1 if less than or equal to target
+#
+testdata$Flag <- ifelse(testdata$Outage.Minutes <= testdata$Target, 1, 0)
+#
+# create subset of records that have flag set to use for math functions later
+#
+passedtros <- subset(testdata, testdata$Flag >= 1)
+#
+# Count number of records in initial data.frame
+#
+totaltros <- length(testdata$Flag)
+#
+# Count number of records in the subset data.frame
+#
+totalpassed <- length(passedtros$Flag)
+#
+# make percentage (rounded with no characters past the decimal place)
+#
+tros <- round(((totalpassed / totaltros)* 100), digits = 0)
